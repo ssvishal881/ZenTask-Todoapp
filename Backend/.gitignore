@@ -1,0 +1,9 @@
+# FIX 5: .env must never be committed — contains JWT secret and DB credentials
+.env
+
+node_modules/
+
+uploads/
+
+*.log
+npm-debug.log*
