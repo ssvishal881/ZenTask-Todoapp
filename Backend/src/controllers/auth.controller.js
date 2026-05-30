@@ -163,13 +163,6 @@ async function getProfile(req, res) {
 
 async function uploadProfileImage(req, res) {
   try {
-    const { username, email } = req.body;
-    if (!username || !email) {
-      return res.status(400).json({
-        success: false,
-        message: "Username and email are required",
-      });
-    }
     if (!req.file) {
       return res.status(400).json({
         success: false,
@@ -181,8 +174,12 @@ async function uploadProfileImage(req, res) {
 
     const user = await userModel.findByIdAndUpdate(
       req.user.id,
-      { profileImage: imageUrl },
-      { new: true },
+      {
+        profileImage: imageUrl,
+      },
+      {
+        new: true,
+      },
     );
 
     return res.status(200).json({
@@ -191,6 +188,8 @@ async function uploadProfileImage(req, res) {
       user,
     });
   } catch (err) {
+    console.log("UPLOAD ERROR:", err);
+
     return res.status(500).json({
       success: false,
       message: "Upload failed",
