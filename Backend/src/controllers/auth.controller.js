@@ -177,7 +177,7 @@ async function uploadProfileImage(req, res) {
       });
     }
 
-    const imageUrl = `http://localhost:3000/uploads/${req.file.filename}`;
+    const imageUrl = `${process.env.BACKEND_URL}/uploads/${req.file.filename}`;
 
     const user = await userModel.findByIdAndUpdate(
       req.user.id,
