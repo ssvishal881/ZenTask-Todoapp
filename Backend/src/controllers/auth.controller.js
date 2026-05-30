@@ -189,7 +189,8 @@ async function uploadProfileImage(req, res) {
     });
   } catch (err) {
     console.log("UPLOAD ERROR:", err);
-
+    console.log(err.response?.data);
+    toast.error(err.response?.data?.message || "Upload failed");
     return res.status(500).json({
       success: false,
       message: "Upload failed",
